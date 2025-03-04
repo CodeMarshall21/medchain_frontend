@@ -1,13 +1,8 @@
-import React, { useState } from "react";
-// import QRCode from "react-qr-code";
+import React from "react";
+import { useOutletContext } from "react-router-dom";
 
 export default function ManageBatch() {
-  // Sample batch data
-  const [batches, setBatches] = useState([
-    { id: "BATCH001", name: "Covid Vaccine", date: "2025-03-01" },
-    { id: "BATCH002", name: "Flu Shot", date: "2025-03-02" },
-    { id: "BATCH003", name: "Pain Relief", date: "2025-03-03" },
-  ]);
+  const { batches } = useOutletContext(); // Get batches from context
 
   return (
     <div className="p-6">
@@ -19,7 +14,6 @@ export default function ManageBatch() {
             <h3 className="text-lg font-bold text-gray-700">{batch.name}</h3>
             <p className="text-gray-500">Batch ID: {batch.id}</p>
             <p className="text-gray-500">Date: {batch.date}</p>
-           
           </div>
         ))}
       </div>

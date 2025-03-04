@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useOutletContext, useNavigate } from "react-router-dom";
 
 export default function RegisterBatch() {
   const [medicineName, setMedicineName] = useState("");
@@ -7,10 +8,34 @@ export default function RegisterBatch() {
   const [quantity, setQuantity] = useState("");
   const [signature, setSignature] = useState("");
 
+  const { addBatch } = useOutletContext(); // Get addBatch from context
+  const navigate = useNavigate();
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Batch Registered:", { medicineName, manufacturingDate, expiryDate, quantity, signature });
+    
+    const newBatch = {
+      id: `BATCH${Math.floor(Math.random() * 10000)}`, // Generate unique batch ID
+      name: medicineName,
+      date: manufacturingDate,
+      expiryDate: expiryDate,
+      quantity: quantity,
+      signature: signature
+    };
+
+    console.log(newBatch);
+    addBatch(newBatch); // Add new batch to state
     alert("Batch Registered Successfully!");
+    
+    // Redirect to Manage Batch page
+    navigate("/dashboard/manage-batch");
+
+    // Clear form
+    setMedicineName("");
+    setManufacturingDate("");
+    setExpiryDate("");
+    setQuantity("");
+    setSignature("");
   };
 
   return (

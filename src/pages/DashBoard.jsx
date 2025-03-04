@@ -1,8 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { FiHome, FiClipboard, FiCheckCircle, FiBell } from "react-icons/fi";
+import RegisterBatch from "./RegisterBatch";
+import ManageBatch from "./ManageBatch";
 
 export default function Dashboard() {
+  const [batches, setBatches] = useState([
+    { id: "BATCH001", name: "Covid Vaccine", date: "2025-03-01" },
+    { id: "BATCH002", name: "Flu Shot", date: "2025-03-02" },
+    { id: "BATCH003", name: "Pain Relief", date: "2025-03-03" },
+  ]);
+
+  // Function to add a new batch
+  const addBatch = (batch) => {
+    setBatches([...batches, batch]);
+  };
+
   return (
     <div className="flex h-screen bg-gray-100">
       {/* Sidebar */}
@@ -42,7 +55,7 @@ export default function Dashboard() {
 
         {/* Page Content */}
         <div className="p-6">
-          <Outlet /> {/* This will load RegisterBatch, ManageBatch, etc. */}
+          <Outlet context={{ batches, addBatch }} />
         </div>
       </div>
     </div>
