@@ -1,10 +1,13 @@
 import React, { useState, useMemo } from "react";
 import { useOutletContext } from 'react-router-dom';
 
-// Helper function to generate a random timestamp
-const generateRandomTimestamp = (baseDate) => {
+// Helper function to generate a timestamp for a specific role
+const generateRoleTimestamp = (baseDate, roleIndex) => {
   const date = new Date(baseDate);
-  // Randomly add hours between 0 and 23, and minutes between 0 and 59
+  // Add exactly one day for each subsequent role
+  date.setDate(date.getDate() + roleIndex);
+  
+  // Randomize hours and minutes while keeping the date progressive
   date.setHours(Math.floor(Math.random() * 24));
   date.setMinutes(Math.floor(Math.random() * 60));
 
@@ -19,22 +22,19 @@ const generateRandomTimestamp = (baseDate) => {
   }).replace(',', '');
 };
 
-// Predefined roles in the supply chain
+// Predefined roles in strict hierarchical order
 const TRACKING_ROLES = [
   "Manufacturer",
   "Distributor", 
   "Wholesaler", 
-  "Retailer", 
-  "Logistics Provider",
-  "Quality Control",
-  "Pharmacy"
+  "Retailer"
 ];
 
 export default function VerifyBatchTracking() {
   const { batches } = useOutletContext(); 
   const [selectedBatch, setSelectedBatch] = useState(null);
 
-  // Memoized batches with random tracking information
+  // Memoized batches with tracking information
   const enhancedBatches = useMemo(() => {
     return batches.map(batch => ({
       ...batch,
@@ -44,16 +44,22 @@ export default function VerifyBatchTracking() {
 
   // Function to generate tracking details for a batch
   function generateTrackingDetails(batch) {
-    // Shuffle roles to ensure randomness
-    const shuffledRoles = [...TRACKING_ROLES].sort(() => 0.5 - Math.random());
-    
-    // Take 3-5 unique roles
-    const selectedRoles = shuffledRoles.slice(0, Math.floor(Math.random() * 3) + 3);
-    
-    // Generate tracking entries with progressive timestamps
-    return selectedRoles.map((role, index) => ({
+    // Get current date and time for Manufacturer
+    const manufacturerTimestamp = new Date().toLocaleString('en-US', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: true
+    }).replace(',', '');
+
+    // Create tracking entries with timestamps exactly one day apart
+    return TRACKING_ROLES.map((role, index) => ({
       role,
-      timestamp: generateRandomTimestamp(new Date(2025, 2, 1 + index))
+      timestamp: index === 0 
+        ? manufacturerTimestamp 
+        : generateRoleTimestamp(new Date(), index)
     }));
   }
 
