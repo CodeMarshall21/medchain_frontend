@@ -3,7 +3,7 @@ import { Link, Outlet } from "react-router-dom";
 import { FiHome, FiClipboard, FiCheckCircle, FiBell } from "react-icons/fi";
 import RegisterBatch from "./RegisterBatch";
 import ManageBatch from "./ManageBatch";
-
+import VerifyBatchTracking from "./VerifyBatchTracking";
 export default function Dashboard() {
   const [batches, setBatches] = useState([
     { id: "BATCH001", name: "Covid Vaccine", date: "2025-03-01" },
