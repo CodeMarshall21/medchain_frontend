@@ -10,23 +10,23 @@ export default function Dashboard() {
         <h1 className="text-1xl font-bold mb-6">MedChain</h1>
         <nav className="space-y-4">
           <Link to="/dashboard" className="flex items-center space-x-2 hover:bg-blue-700 p-2 rounded-lg">
-            <FiHome />
+            <FiHome className="text-gray-300" />
             <span className="text-white">Home</span>
           </Link>
-          <Link to="/dashboard/register-batch" className="flex  items-center space-x-2 hover:bg-blue-700 p-2 rounded-lg">
-            <FiClipboard />
+          <Link to="/dashboard/register-batch" className="flex items-center space-x-2 hover:bg-blue-700 p-2 rounded-lg">
+            <FiClipboard className="text-gray-300" />
             <span className="text-white">Register Batch</span>
           </Link>
           <Link to="/dashboard/manage-batch" className="flex items-center space-x-2 hover:bg-blue-700 p-2 rounded-lg">
-            <FiCheckCircle />
+            <FiCheckCircle className="text-gray-300" />
             <span className="text-white">Manage Batch</span>
           </Link>
           <Link to="/dashboard/verify-batch" className="flex items-center space-x-2 hover:bg-blue-700 p-2 rounded-lg">
-            <FiCheckCircle />
+            <FiCheckCircle className="text-gray-300" />
             <span className="text-white">Verify Batch</span>
           </Link>
           <Link to="/dashboard/notifications" className="flex items-center space-x-2 hover:bg-blue-700 p-2 rounded-lg">
-            <FiBell />
+            <FiBell className="text-gray-300" />
             <span className="text-white">Notifications</span>
           </Link>
         </nav>
