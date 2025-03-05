@@ -49,7 +49,7 @@ export default function RegisterBatch() {
             className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300"
             value={medicineName}
             onChange={(e) => setMedicineName(e.target.value)}
-            required
+            required  
           />
         </div>
         <div className="grid grid-cols-2 gap-4">
