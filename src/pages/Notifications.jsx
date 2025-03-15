@@ -7,6 +7,8 @@ export default function Notifications() {
     { id: 1, message: "Batch BATCH001 signed by Distributor", read: false },
     { id: 2, message: "Batch BATCH002 signed by Wholesaler", read: false },
     { id: 3, message: "Batch BATCH003 signed by Retailer", read: false },
+    { id: 4, message: "Batch BATCH001 signed by Wholesaler", read: false },
+    { id: 5, message: "Batch BATCH002 signed by Retailer", read: false },
   ]);
 
   // Function to mark notification as read
